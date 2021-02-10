@@ -1,18 +1,28 @@
-import Link from 'next/link'
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
-export default function Home() {
+import { staticRooms } from "../mocks/rooms";
+
+const Title = styled.h1`
+  font-size: 5rem;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
+const Home = () => {
+  const router = useRouter();
+
+  const joinRoom = (roomId: number) => router.push(`rooms/${roomId}`);
+
   return (
-    <ul>
-      <li>
-        <Link href="/a" as="/a">
-          <a>a</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/b" as="/b">
-          <a>b</a>
-        </Link>
-      </li>
-    </ul>
-  )
-}
+    <>
+      <Title>Selecciona una de las salas disponibles: </Title>
+      {staticRooms.map((room) => (
+        <li key={room.id} onClick={() => joinRoom(room.id)}>
+          {room.name}
+        </li>
+      ))}
+    </>
+  );
+};
+
+export default Home;
