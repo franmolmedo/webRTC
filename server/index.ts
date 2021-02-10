@@ -41,6 +41,9 @@ io.on("connection", (socket) => {
     console.log(`Broadcasting start_call event to peers in room ${roomId}`);
     socket.broadcast.to(roomId).emit("start_call");
   });
+  socket.on("penco", () => {
+    console.log(`pencazo`);
+  });
   socket.on("webrtc_offer", (event) => {
     console.log(
       `Broadcasting webrtc_offer event to peers in room ${event.roomId}`
